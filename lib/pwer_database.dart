@@ -56,7 +56,7 @@ CREATE TABLE $table_logins(
 
 CREATE TABLE $table_user_details(
   ${user_detailFields.user_details_id} $idType,
-  FOREIGN KEY ${user_detailFields.user_login_id} REFRENCES ${loginFields.login_id},
+  FOREIGN KEY ${user_detailFields.user_login_id} REFERENCES ${loginFields.login_id},
   ${user_detailFields.user_fname} $textTypeNotNull,
   ${user_detailFields.user_lname} $textTypeNotNull,
   ${user_detailFields.user_b_date} $textTypeNotNull,
@@ -74,7 +74,7 @@ CREATE TABLE $table_exercise_category(
 
 CREATE TABLE $table_user_exercise(
   ${user_exerciseFields.user_exercise_id} $idType,
-  FOREIGN KEY ${user_exerciseFields.user_exercise_category_id} REFRENCES ${exercise_categoryFields.exercise_category_id},
+  FOREIGN KEY ${user_exerciseFields.user_exercise_category_id} REFERENCES ${exercise_categoryFields.exercise_category_id},
   ${user_exerciseFields.user_exercise_name} $textTypeNotNull,
   ${user_exerciseFields.user_exercise_target_area} $textTypeNotNull,
   ${user_exerciseFields.user_exercise_default_weight} $integerTypeNotNull,
@@ -84,9 +84,9 @@ CREATE TABLE $table_user_exercise(
 
 CREATE TABLE $table_user_activity(
   ${user_activityFields.user_activity_id} $idType,
-  FOREIGN KEY ${user_activityFields.user_login_id}  REFRENCES ${loginFields.login_id},
-  FOREIGN KEY ${user_activityFields.user_exercise_category_id}  REFRENCES ${exercise_categoryFields.exercise_category_id},
-  FOREIGN KEY ${user_activityFields.user_exercise_id} REFRENCES ${user_exerciseFields.user_exercise_id},
+  FOREIGN KEY ${user_activityFields.user_login_id}  REFERENCES ${loginFields.login_id},
+  FOREIGN KEY ${user_activityFields.user_exercise_category_id}  REFERENCES ${exercise_categoryFields.exercise_category_id},
+  FOREIGN KEY ${user_activityFields.user_exercise_id} REFERENCES ${user_exerciseFields.user_exercise_id},
   ${user_activityFields.user_activity_intensity} $textType,
   ${user_activityFields.user_activity_dateTime} $textType,
   ${user_activityFields.user_activity_duration} $integerType,
@@ -97,9 +97,9 @@ CREATE TABLE $table_user_activity(
 
 CREATE TABLE $table_workout_planner(
   ${workout_plannerFields.workout_planner_id} $idType,
-  FOREIGN KEY ${workout_plannerFields.user_login_id}  REFRENCES ${loginFields.login_id},
-  FOREIGN KEY ${workout_plannerFields.exercise_category_id}  REFRENCES ${exercise_categoryFields.exercise_category_id},
-  FOREIGN KEY ${workout_plannerFields.user_exercise_id} REFRENCES ${user_exerciseFields.user_exercise_id},
+  FOREIGN KEY ${workout_plannerFields.user_login_id}  REFERENCES ${loginFields.login_id},
+  FOREIGN KEY ${workout_plannerFields.exercise_category_id}  REFERENCES ${exercise_categoryFields.exercise_category_id},
+  FOREIGN KEY ${workout_plannerFields.user_exercise_id} REFERENCES ${user_exerciseFields.user_exercise_id},
   ${workout_plannerFields.workout_time_date} $textTypeNotNull,
   ${workout_plannerFields.workout_rep} $integerTypeNotNull,
   ${workout_plannerFields.workout_set} $integerTypeNotNull,
@@ -128,20 +128,20 @@ CREATE TABLE $table_food_info(
   ${food_infoFields.food_description} $textTypeNotNull,
   ${food_infoFields.food_serving_size} $integerTypeNotNull,
   ${food_infoFields.food_calories} $integerTypeNotNull,
-  FOREIGN KEY ${food_infoFields.food_nutrition_id} REFRENCES ${food_nutritionFields.food_nutrition_id},
+  FOREIGN KEY ${food_infoFields.food_nutrition_id} REFERENCES ${food_nutritionFields.food_nutrition_id},
 )
 
 CREATE TABLE $table_meal_planner(
   ${meal_plannerFields.meal_planner_id} $idType,
-  FOREIGN KEY ${meal_plannerFields.user_login_id} REFRENCES ${loginFields.login_id},
-  FOREIGN KEY ${meal_plannerFields.food_id} REFRENCES ${food_infoFields.food_id},
+  FOREIGN KEY ${meal_plannerFields.user_login_id} REFERENCES ${loginFields.login_id},
+  FOREIGN KEY ${meal_plannerFields.food_id} REFERENCES ${food_infoFields.food_id},
   ${meal_plannerFields.meal_planner_date_time} $textTypeNotNull,
   ${meal_plannerFields.meal_name} $textTypeNotNull,
 )
 
 CREATE TABLE $table_user_movement_tracker(
   ${user_movement_trackerFields.user_movement_tracker_id} $idType,
-  FOREIGN KEY ${user_movement_trackerFields.user_login_id} REFRENCES ${loginFields.login_id},
+  FOREIGN KEY ${user_movement_trackerFields.user_login_id} REFERENCES ${loginFields.login_id},
   ${user_movement_trackerFields.user_step_count} $integerTypeNotNull,
   ${user_movement_trackerFields.user_distance} $integerTypeNotNull,
   ${user_movement_trackerFields.user_avg_speed} $integerTypeNotNull,
@@ -151,7 +151,7 @@ CREATE TABLE $table_user_movement_tracker(
 
 CREATE TABLE $table_settings(
   ${settingFields.setting_id} $idType,
-  FOREIGN KEY ${settingFields.login_id} REFRENCES ${loginFields.login_id},
+  FOREIGN KEY ${settingFields.login_id} REFERENCES ${loginFields.login_id},
   ${settingFields.setting_distance_unit} $textTypeNotNull,
   ${settingFields.setting_weight_unit} $textTypeNotNull,
   ${settingFields.setting_speed_unit} $textTypeNotNull,
@@ -165,19 +165,19 @@ CREATE TABLE $table_friendship(
 
 CREATE TABLE $table_friends_list(
   ${friends_listFields.friend_list_id} $idType,
-  FOREIGN KEY ${friends_listFields.user_login_id} REFRENCES ${loginFields.login_id},
-  FOREIGN KEY ${friends_listFields.friend_email} REFRENCES ${loginFields.login_email},
+  FOREIGN KEY ${friends_listFields.user_login_id} REFERENCES ${loginFields.login_id},
+  FOREIGN KEY ${friends_listFields.friend_email} REFERENCES ${loginFields.login_email},
 )
 
 CREATE TABLE $table_friend_friendship(
   ${friend_friendshipFields.friend_friendship_id} $idType,
-  FORIEGN KEY ${friend_friendshipFields.friend_list_id} REFRENCES ${friends_listFields.friend_list_id},
-  FORIEGN KEY ${friend_friendshipFields.friendship_id} REFRENCES ${friendshipFields.friendship_id},
+  FOREIGN KEY ${friend_friendshipFields.friend_list_id} REFERENCES ${friends_listFields.friend_list_id},
+  FOREIGN KEY ${friend_friendshipFields.friendship_id} REFERENCES ${friendshipFields.friendship_id},
 )
 
 CREATE TABLE $table_user_health(
   ${user_healthFields.health_id} $idType,
-  FOREIGN KEY ${user_healthFields.user_id} REFRENCES ${loginFields.login_id},
+  FOREIGN KEY ${user_healthFields.user_id} REFERENCES ${loginFields.login_id},
   ${user_healthFields.user_weight} $integerTypeNotNull,
   ${user_healthFields.user_bmi} $integerType,
   ${user_healthFields.user_calories_burnt} $integerType,
