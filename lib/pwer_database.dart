@@ -2,7 +2,7 @@ import 'package:flutter/animation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:pwer_database/model/table_entry.dart';
+import 'table_entry.dart';
 
 class pwerDatabase {
   static final pwerDatabase instance =
