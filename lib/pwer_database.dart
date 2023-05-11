@@ -3,10 +3,11 @@ import 'package:flutter/gestures.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'table_entry.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 class pwerDatabase {
   static final pwerDatabase instance =
-      pwerDatabase._init(); // calls the constructor
+  pwerDatabase._init(); // calls the constructor
 
   static Database? _database; //from sqflite package
 
@@ -26,16 +27,26 @@ class pwerDatabase {
   Future<Database> _initDB(String filePath) async {
     //creates a new method where we get our file path
     final dbpath =
-        await getDatabasesPath(); //here we are storing our database in our file system specific to iOS and Android
+    await getDatabasesPath(); //here we are storing our database in our file system specific to iOS and Android
     final path = join(dbpath, filePath); //gives us path to open databse from
 
     return await openDatabase(path,
         version: 1,
         onCreate:
-            _createDB); //open database from path and on create means when creating a new databse run this command
+        _createDB); //open database from path and on create means when creating a new databse run this command
   }
 
-  Future _createDB(Database db, int version) async {
+  Future<void> resetDatabase() async {
+    final db = await database;
+    await db.close();
+    _database = null;
+    final dbpath = await getDatabasesPath();
+    final path = join(dbpath, 'table_entry.dart');
+    await deleteDatabase(path);
+  }
+
+
+  Future<void> _createDB(Database db, int version) async {
     final idType =
         'INTEGER PRIMARY KEY AUTOINCREMENT'; //creates parameters for the field
     final integerTypeNotNull = 'INTEGER NOT NULL';
@@ -48,15 +59,15 @@ class pwerDatabase {
     final DoubleType = 'DOUBLE';
 
     await db.execute('''
-CREATE TABLE $table_logins(
+CREATE TABLE table_logins(
   ${loginFields.login_id} $idType,
   ${loginFields.login_email} $textTypeNotNull,
   ${loginFields.login_password} $textTypeNotNull
-)
+);
 
-CREATE TABLE $table_user_details(
+CREATE TABLE table_user_details(
   ${user_detailFields.user_details_id} $idType,
-  FOREIGN KEY ${user_detailFields.user_login_id} REFERENCES ${loginFields.login_id},
+  ${user_detailFields.user_login_id} $integerType,
   ${user_detailFields.user_fname} $textTypeNotNull,
   ${user_detailFields.user_lname} $textTypeNotNull,
   ${user_detailFields.user_b_date} $textTypeNotNull,
@@ -64,49 +75,57 @@ CREATE TABLE $table_user_details(
   ${user_detailFields.user_sex} $textTypeNotNull,
   ${user_detailFields.user_gender} $textType,
   ${user_detailFields.user_phone_num} $BigIntType,
-)
+  FOREIGN KEY (${user_detailFields.user_login_id}) REFERENCES table_logins(${loginFields.login_id})
+);
 
-CREATE TABLE $table_exercise_category(
+CREATE TABLE table_exercise_category(
   ${exercise_categoryFields.exercise_category_id} $idType,
   ${exercise_categoryFields.exercise_category_name} $textTypeNotNull,
-  ${exercise_categoryFields.exercise_category_description} $textTypeNotNull,
-)
+  ${exercise_categoryFields.exercise_category_description} $textTypeNotNull
+);
 
-CREATE TABLE $table_user_exercise(
+CREATE TABLE table_user_exercise(
   ${user_exerciseFields.user_exercise_id} $idType,
-  FOREIGN KEY ${user_exerciseFields.user_exercise_category_id} REFERENCES ${exercise_categoryFields.exercise_category_id},
+  ${user_exerciseFields.user_exercise_category_id} $integerType,
   ${user_exerciseFields.user_exercise_name} $textTypeNotNull,
   ${user_exerciseFields.user_exercise_target_area} $textTypeNotNull,
   ${user_exerciseFields.user_exercise_default_weight} $integerTypeNotNull,
   ${user_exerciseFields.user_exercise_instruction} $textType,
   ${user_exerciseFields.user_exercise_video} $textType,
-)
+  FOREIGN KEY (${user_exerciseFields.user_exercise_category_id}) REFERENCES table_exercise_category(${exercise_categoryFields.exercise_category_id})
+);
 
-CREATE TABLE $table_user_activity(
+CREATE TABLE table_user_activity(
   ${user_activityFields.user_activity_id} $idType,
-  FOREIGN KEY ${user_activityFields.user_login_id}  REFERENCES ${loginFields.login_id},
-  FOREIGN KEY ${user_activityFields.user_exercise_category_id}  REFERENCES ${exercise_categoryFields.exercise_category_id},
-  FOREIGN KEY ${user_activityFields.user_exercise_id} REFERENCES ${user_exerciseFields.user_exercise_id},
+  ${user_activityFields.user_login_id} $integerType,
+  ${user_activityFields.user_exercise_category_id} $integerType,
+  ${user_activityFields.user_exercise_id} $integerType,
   ${user_activityFields.user_activity_intensity} $textType,
   ${user_activityFields.user_activity_dateTime} $textType,
   ${user_activityFields.user_activity_duration} $integerType,
   ${user_activityFields.user_activity_rep} $integerType,
   ${user_activityFields.user_activity_set} $integerType,
   ${user_activityFields.user_activity_calories_burnt} $integerType,
-)
+  FOREIGN KEY (${user_activityFields.user_login_id}) REFERENCES table_logins(${loginFields.login_id}),
+  FOREIGN KEY (${user_activityFields.user_exercise_category_id}) REFERENCES table_exercise_category(${exercise_categoryFields.exercise_category_id}),
+  FOREIGN KEY (${user_activityFields.user_exercise_id}) REFERENCES table_user_exercise(${user_exerciseFields.user_exercise_id})
+);
 
-CREATE TABLE $table_workout_planner(
+CREATE TABLE table_workout_planner(
   ${workout_plannerFields.workout_planner_id} $idType,
-  FOREIGN KEY ${workout_plannerFields.user_login_id}  REFERENCES ${loginFields.login_id},
-  FOREIGN KEY ${workout_plannerFields.exercise_category_id}  REFERENCES ${exercise_categoryFields.exercise_category_id},
-  FOREIGN KEY ${workout_plannerFields.user_exercise_id} REFERENCES ${user_exerciseFields.user_exercise_id},
+  ${workout_plannerFields.user_login_id} $integerType,
+  ${workout_plannerFields.exercise_category_id} $integerType,
+  ${workout_plannerFields.user_exercise_id} $integerType,
   ${workout_plannerFields.workout_time_date} $textTypeNotNull,
   ${workout_plannerFields.workout_rep} $integerTypeNotNull,
   ${workout_plannerFields.workout_set} $integerTypeNotNull,
   ${workout_plannerFields.workout_duration} $integerType,
-)
+  FOREIGN KEY (${workout_plannerFields.user_login_id}) REFERENCES table_logins(${loginFields.login_id}),
+  FOREIGN KEY (${workout_plannerFields.exercise_category_id}) REFERENCES table_exercise_category(${exercise_categoryFields.exercise_category_id}),
+  FOREIGN KEY (${workout_plannerFields.user_exercise_id}) REFERENCES table_user_exercise(${user_exerciseFields.user_exercise_id})
+);
 
-CREATE TABLE $table_food_nutrition(
+CREATE TABLE table_food_nutrition(
   ${food_nutritionFields.food_nutrition_id} $idType,
   ${food_nutritionFields.total_carbs} $integerType,
   ${food_nutritionFields.total_fat} $integerType,
@@ -119,73 +138,82 @@ CREATE TABLE $table_food_nutrition(
   ${food_nutritionFields.sugar} $integerType,
   ${food_nutritionFields.sodium} $integerType,
   ${food_nutritionFields.vitamin_A} $integerType,
-  ${food_nutritionFields.vitamin_C} $integerType,
-)
+  ${food_nutritionFields.vitamin_C} $integerType
+);
 
-CREATE TABLE $table_food_info(
+CREATE TABLE table_food_info(
   ${food_infoFields.food_id} $idType,
+  ${food_infoFields.food_nutrition_id} $integerType,
   ${food_infoFields.food_category} $textTypeNotNull,
   ${food_infoFields.food_description} $textTypeNotNull,
   ${food_infoFields.food_serving_size} $integerTypeNotNull,
   ${food_infoFields.food_calories} $integerTypeNotNull,
-  FOREIGN KEY ${food_infoFields.food_nutrition_id} REFERENCES ${food_nutritionFields.food_nutrition_id},
-)
+  FOREIGN KEY (${food_infoFields.food_nutrition_id}) REFERENCES table_food_nutrition(${food_nutritionFields.food_nutrition_id})
+);
 
-CREATE TABLE $table_meal_planner(
+CREATE TABLE table_meal_planner(
   ${meal_plannerFields.meal_planner_id} $idType,
-  FOREIGN KEY ${meal_plannerFields.user_login_id} REFERENCES ${loginFields.login_id},
-  FOREIGN KEY ${meal_plannerFields.food_id} REFERENCES ${food_infoFields.food_id},
+  ${meal_plannerFields.user_login_id} $integerType,
+  ${meal_plannerFields.food_id} $integerType,
   ${meal_plannerFields.meal_planner_date_time} $textTypeNotNull,
   ${meal_plannerFields.meal_name} $textTypeNotNull,
-)
+  FOREIGN KEY (${meal_plannerFields.user_login_id}) REFERENCES table_logins(${loginFields.login_id}),
+  FOREIGN KEY (${meal_plannerFields.food_id}) REFERENCES table_food_info(${food_infoFields.food_id})
+);
 
-CREATE TABLE $table_user_movement_tracker(
+CREATE TABLE table_user_movement_tracker(
   ${user_movement_trackerFields.user_movement_tracker_id} $idType,
-  FOREIGN KEY ${user_movement_trackerFields.user_login_id} REFERENCES ${loginFields.login_id},
+  ${user_movement_trackerFields.user_login_id} $integerType,
   ${user_movement_trackerFields.user_step_count} $integerTypeNotNull,
   ${user_movement_trackerFields.user_distance} $integerTypeNotNull,
   ${user_movement_trackerFields.user_avg_speed} $integerTypeNotNull,
   ${user_movement_trackerFields.user_movement_duration} $integerTypeNotNull,
   ${user_movement_trackerFields.user_movement_date_time} $textTypeNotNull,
-)
+  FOREIGN KEY (${user_movement_trackerFields.user_login_id}) REFERENCES table_logins(${loginFields.login_id})
+);
 
-CREATE TABLE $table_settings(
+CREATE TABLE table_settings(
   ${settingFields.setting_id} $idType,
-  FOREIGN KEY ${settingFields.login_id} REFERENCES ${loginFields.login_id},
+  ${settingFields.login_id} $integerType,
   ${settingFields.setting_distance_unit} $textTypeNotNull,
   ${settingFields.setting_weight_unit} $textTypeNotNull,
   ${settingFields.setting_speed_unit} $textTypeNotNull,
   ${settingFields.setting_language} $textTypeNotNull,
-)
+  FOREIGN KEY (${settingFields.login_id}) REFERENCES table_logins(${loginFields.login_id})
+);
 
-CREATE TABLE $table_friendship(
+CREATE TABLE table_friendship(
   ${friendshipFields.friendship_id} $idType,
-  ${friendshipFields.friendship_type} $textTypeNotNull,
-)
+  ${friendshipFields.friendship_type} $textTypeNotNull
+);
 
-CREATE TABLE $table_friends_list(
+CREATE TABLE table_friends_list(
   ${friends_listFields.friend_list_id} $idType,
-  FOREIGN KEY ${friends_listFields.user_login_id} REFERENCES ${loginFields.login_id},
-  FOREIGN KEY ${friends_listFields.friend_email} REFERENCES ${loginFields.login_email},
-)
+  ${friends_listFields.user_login_id} $integerType,
+  ${friends_listFields.friend_email} $textTypeNotNull,
+  FOREIGN KEY (${friends_listFields.user_login_id}) REFERENCES table_logins(${loginFields.login_id}),
+  FOREIGN KEY (${friends_listFields.friend_email}) REFERENCES table_logins(${loginFields.login_email})
+);
 
-CREATE TABLE $table_friend_friendship(
+CREATE TABLE table_friend_friendship(
   ${friend_friendshipFields.friend_friendship_id} $idType,
-  FOREIGN KEY ${friend_friendshipFields.friend_list_id} REFERENCES ${friends_listFields.friend_list_id},
-  FOREIGN KEY ${friend_friendshipFields.friendship_id} REFERENCES ${friendshipFields.friendship_id},
-)
+  ${friend_friendshipFields.friend_list_id} $integerType,
+  ${friend_friendshipFields.friendship_id} $integerType,
+  FOREIGN KEY (${friend_friendshipFields.friend_list_id}) REFERENCES table_friends_list(${friends_listFields.friend_list_id}),
+  FOREIGN KEY (${friend_friendshipFields.friendship_id}) REFERENCES table_friendship(${friendshipFields.friendship_id})
+);
 
-CREATE TABLE $table_user_health(
+CREATE TABLE table_user_health(
   ${user_healthFields.health_id} $idType,
-  FOREIGN KEY ${user_healthFields.user_id} REFERENCES ${loginFields.login_id},
+  ${user_healthFields.user_id} $integerType,
   ${user_healthFields.user_weight} $integerTypeNotNull,
   ${user_healthFields.user_bmi} $integerType,
   ${user_healthFields.user_calories_burnt} $integerType,
   ${user_healthFields.user_calories_consumed} $integerType,
   ${user_healthFields.date_time_recorded} $textTypeNotNull,
-  ${user_healthFields.user_hydration_litres} $DoubleType,
-)
-
+  ${user_healthFields.user_hydration_litres} $integerType,
+  FOREIGN KEY (${user_healthFields.user_id}) REFERENCES table_logins(${loginFields.login_id})
+);
 ''');
   }
 
@@ -666,7 +694,7 @@ CREATE TABLE $table_user_health(
     final db = await instance.database;
 
     final id =
-        await db.insert(table_user_movement_tracker, table_entry.toJson());
+    await db.insert(table_user_movement_tracker, table_entry.toJson());
 
     return table_entry.copy(user_movement_tracker_id: id);
   }
@@ -865,13 +893,22 @@ CREATE TABLE $table_user_health(
     return table_entry.copy(health_id: id);
   }
 
+  Future<List<Map<String, dynamic>>> getUserHealthData(int user_id) async {
+    final db = await instance.database;
+    final result = await db.query(
+        table_user_health,
+        where: '${user_healthFields.user_id} = ?',
+        whereArgs: [user_id]);
+    return result;
+  }
+
   Future<user_health> readUser_health(int id) async {
     final db = await instance.database;
 
     final maps = await db.query(
       table_user_health,
       columns: user_healthFields.values,
-      where: '${user_healthFields.values}',
+      where: '${user_healthFields.health_id} = ?',
       whereArgs: [id],
     );
 
