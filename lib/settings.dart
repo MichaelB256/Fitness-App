@@ -9,11 +9,11 @@ class settingsPage extends StatelessWidget {
       flex: 20,
       child: OutlinedButton(
         onPressed: () {},
-        child: Text(text),
         style: OutlinedButton.styleFrom(
             shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
             minimumSize: Size(width * 0.8, height * 0.1)),
+        child: Text(text),
       ),
     );
   }
@@ -45,18 +45,18 @@ class settingsPage extends StatelessWidget {
                   Expanded(
                     flex: 9,
                     child: Material(
-                      shape: CircleBorder(),
+                      shape: const CircleBorder(),
                       clipBehavior: Clip.antiAliasWithSaveLayer,
                       child: InkWell(
                         onTap: () {},
                         child: Ink.image(
-                          image: const AssetImage('assets/images/Saturn.png'),
+                          image: const AssetImage('assets/App_Icon_Powr.png'),
                           fit: BoxFit.contain,
                         ),
                       ),
                     ),
                   ),
-                  Expanded(
+                  const Expanded(
                     flex: 1,
                     child: Text("Account Name"),
                   ),
@@ -69,43 +69,43 @@ class settingsPage extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => accountSettings()));
+                              builder: (context) => const accountSettings()));
                     },
-                    child: Text("Account Settings"),
                     style: OutlinedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(50)),
                         minimumSize: Size(width * 0.8, height * 0.1)),
+                    child: const Text("Account Settings"),
                   )),
               Flexible(
                   flex: 20,
                   child: OutlinedButton(
                     onPressed: () {},
-                    child: Text("App Settings"),
                     style: OutlinedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(50)),
                         minimumSize: Size(width * 0.8, height * 0.1)),
+                    child: const Text("App Settings"),
                   )),
               Flexible(
                   flex: 20,
                   child: OutlinedButton(
                     onPressed: () {},
-                    child: Text("Accessibility Settings"),
                     style: OutlinedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(50)),
                         minimumSize: Size(width * 0.8, height * 0.1)),
+                    child: const Text("Accessibility Settings"),
                   )),
               Flexible(
                   flex: 20,
                   child: OutlinedButton(
                     onPressed: () {},
-                    child: Text("Sign Out"),
                     style: OutlinedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(50)),
                         minimumSize: Size(width * 0.8, height * 0.1)),
+                    child: const Text("Sign Out"),
                   )),
             ]),
       ),
@@ -123,55 +123,57 @@ class accountSettingsState extends State<accountSettings> {
   final fieldText = TextEditingController();
 
   Future changePassword() => showDialog(
-    context: context,
-    builder: (context) => AlertDialog(
-        title: Text('Change Password'),
-        content: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            TextFormField(
-              controller: fieldText,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Current Password',
-              ),
-              onFieldSubmitted: (value) {
-                fieldText.clear();
-              },
+        context: context,
+        builder: (context) => AlertDialog(
+            title: const Text('Change Password'),
+            content: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                TextFormField(
+                  controller: fieldText,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Current Password',
+                  ),
+                  onFieldSubmitted: (value) {
+                    fieldText.clear();
+                  },
+                ),
+                TextFormField(
+                  controller: fieldText,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'New Password',
+                  ),
+                  onFieldSubmitted: (value) {
+                    fieldText.clear();
+                  },
+                ),
+                TextFormField(
+                  controller: fieldText,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Confirm New Password',
+                  ),
+                  onFieldSubmitted: (value) {
+                    fieldText.clear();
+                  },
+                ),
+              ],
             ),
-            TextFormField(
-              controller: fieldText,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'New Password',
+            actions: [
+              TextButton(
+                child: const Text('CANCEL'),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
               ),
-              onFieldSubmitted: (value) {
-                fieldText.clear();
-              },
-            ),
-            TextFormField(
-              controller: fieldText,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Confirm New Password',
+              TextButton(
+                child: const Text('SUBMIT'),
+                onPressed: () {},
               ),
-              onFieldSubmitted: (value) {
-                fieldText.clear();
-              },
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            child: Text('CANCEL'),
-            onPressed: () {Navigator.pop(context);},
-          ),
-          TextButton(
-            child: Text('SUBMIT'),
-            onPressed: () {},
-          ),
-        ]),
-  );
+            ]),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -202,18 +204,18 @@ class accountSettingsState extends State<accountSettings> {
                   Expanded(
                     flex: 9,
                     child: Material(
-                      shape: CircleBorder(),
+                      shape: const CircleBorder(),
                       clipBehavior: Clip.antiAliasWithSaveLayer,
                       child: InkWell(
                         onTap: () {},
                         child: Ink.image(
-                          image: const AssetImage('assets/images/Saturn.png'),
+                          image: const AssetImage('assets/App_Icon_Powr.png'),
                           fit: BoxFit.contain,
                         ),
                       ),
                     ),
                   ),
-                  Expanded(
+                  const Expanded(
                     flex: 1,
                     child: Text("Edit Profile Picture"),
                   ),
@@ -224,7 +226,7 @@ class accountSettingsState extends State<accountSettings> {
                       height: height * 0.1,
                       child: TextFormField(
                         controller: fieldText,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: 'Username',
                         ),
@@ -241,7 +243,7 @@ class accountSettingsState extends State<accountSettings> {
                       height: height * 0.1,
                       child: TextFormField(
                         controller: fieldText,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: 'Email Address',
                         ),

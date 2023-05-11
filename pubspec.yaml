@@ -32,6 +32,10 @@ dependencies:
     sdk: flutter
   sqflite : ^2.2.4+1
   syncfusion_flutter_charts: ^21.2.3
+  charts_flutter: ^0.11.0
+  sqflite_common_ffi: ^2.2.5
+
+
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -64,6 +68,16 @@ flutter:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
+
+  assets:
+    - assets/App_Icon_Powr.png
+    - assets/Powr_Logo.png
+    - assets/DumbellRow.jpg
+    - assets/InclineChestPress.png
+    - assets/Pushup.png
+    - assets/ShoulderPress.jpg
+    - assets/Squats.png
+    - assets/Lunges.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
