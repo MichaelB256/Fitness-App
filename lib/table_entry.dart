@@ -8,11 +8,11 @@ final String table_exercise_category = 'exercise_category';
 final String table_user_exercise = 'user_exercise';
 final String table_workout_planner = 'workout_planner';
 final String table_meal_planner = 'meal_planner';
-final String table_food_info = 'food_info';
+final String table_food_info = 'table_food_info';
 final String table_food_nutrition = 'food_nutrition';
 final String table_user_movement_tracker = 'user_movement_tracker';
 final String table_settings = 'settings';
-final String table_user_health = 'user_health';
+final String table_user_health = 'table_user_health';
 final String table_friends_list = 'friends_list';
 final String table_friend_friendship = 'friend_friendship';
 final String table_friendship = 'friendship';
@@ -52,16 +52,16 @@ class login {
       );
 
   static login fromJson(Map<String, Object?> json) => login(
-        login_id: json[loginFields.login_id] as int?,
-        login_email: json[loginFields.login_email] as String,
-        login_password: json[loginFields.login_password] as String,
-      );
+    login_id: json[loginFields.login_id] as int?,
+    login_email: json[loginFields.login_email] as String,
+    login_password: json[loginFields.login_password] as String,
+  );
 
   Map<String, Object?> toJson() => {
-        loginFields.login_id: login_id,
-        loginFields.login_email: login_email,
-        loginFields.login_password: login_password,
-      };
+    loginFields.login_id: login_id,
+    loginFields.login_email: login_email,
+    loginFields.login_password: login_password,
+  };
 }
 
 //////////////////////////////USER_DETAILS TABLE INFO///////////////////////////////////////////////////
@@ -137,29 +137,29 @@ class user_details {
       );
 
   static user_details fromJson(Map<String, Object?> json) => user_details(
-        user_details_id: json[user_detailFields.user_details_id] as int?,
-        user_login_id: json[user_detailFields.user_login_id] as int?,
-        user_fname: json[user_detailFields.user_fname] as String,
-        user_lname: json[user_detailFields.user_lname] as String,
-        user_b_date:
-            DateTime.parse(json[user_detailFields.user_b_date] as String),
-        user_height: json[user_detailFields.user_height] as int,
-        user_sex: json[user_detailFields.user_sex] as String,
-        user_gender: json[user_detailFields.user_gender] as String,
-        user_phone_num: json[user_detailFields.user_phone_num] as BigInt,
-      );
+    user_details_id: json[user_detailFields.user_details_id] as int?,
+    user_login_id: json[user_detailFields.user_login_id] as int?,
+    user_fname: json[user_detailFields.user_fname] as String,
+    user_lname: json[user_detailFields.user_lname] as String,
+    user_b_date:
+    DateTime.parse(json[user_detailFields.user_b_date] as String),
+    user_height: json[user_detailFields.user_height] as int,
+    user_sex: json[user_detailFields.user_sex] as String,
+    user_gender: json[user_detailFields.user_gender] as String,
+    user_phone_num: json[user_detailFields.user_phone_num] as BigInt,
+  );
 
   Map<String, Object?> toJson() => {
-        user_detailFields.user_details_id: user_details_id,
-        user_detailFields.user_login_id: user_login_id,
-        user_detailFields.user_fname: user_fname,
-        user_detailFields.user_lname: user_lname,
-        user_detailFields.user_b_date: user_b_date.toIso8601String(),
-        user_detailFields.user_height: user_height,
-        user_detailFields.user_sex: user_sex,
-        user_detailFields.user_gender: user_gender,
-        user_detailFields.user_phone_num: user_phone_num,
-      };
+    user_detailFields.user_details_id: user_details_id,
+    user_detailFields.user_login_id: user_login_id,
+    user_detailFields.user_fname: user_fname,
+    user_detailFields.user_lname: user_lname,
+    user_detailFields.user_b_date: user_b_date.toIso8601String(),
+    user_detailFields.user_height: user_height,
+    user_detailFields.user_sex: user_sex,
+    user_detailFields.user_gender: user_gender,
+    user_detailFields.user_phone_num: user_phone_num,
+  };
 }
 
 //////////////////////////////USER_ACTIVITY TABLE INFO///////////////////////////////////////////////////
@@ -232,53 +232,53 @@ class user_activity {
         user_activity_id: user_activity_id ?? this.user_activity_id,
         user_login_id: user_login_id ?? this.user_login_id,
         user_exercise_category_id:
-            user_exercise_category_id ?? this.user_exercise_category_id,
+        user_exercise_category_id ?? this.user_exercise_category_id,
         user_exercise_id: user_exercise_id ?? this.user_exercise_id,
         user_activity_intensity:
-            user_activity_intensity ?? this.user_activity_intensity,
+        user_activity_intensity ?? this.user_activity_intensity,
         user_activity_dateTime:
-            user_activity_dateTime ?? this.user_activity_dateTime,
+        user_activity_dateTime ?? this.user_activity_dateTime,
         user_activity_duration:
-            user_activity_duration ?? this.user_activity_duration,
+        user_activity_duration ?? this.user_activity_duration,
         user_activity_rep: user_activity_rep ?? this.user_activity_rep,
         user_activity_set: user_activity_set ?? this.user_activity_set,
         user_activity_calories_burnt:
-            user_activity_calories_burnt ?? this.user_activity_calories_burnt,
+        user_activity_calories_burnt ?? this.user_activity_calories_burnt,
       );
 
   static user_activity fromJson(Map<String, Object?> json) => user_activity(
-        user_activity_id: json[user_activityFields.user_activity_id] as int?,
-        user_login_id: json[user_activityFields.user_login_id] as int?,
-        user_exercise_category_id:
-            json[user_activityFields.user_exercise_category_id] as int?,
-        user_exercise_id: json[user_activityFields.user_exercise_id] as int?,
-        user_activity_intensity:
-            json[user_activityFields.user_activity_intensity] as String,
-        user_activity_dateTime: DateTime.parse(
-            json[user_activityFields.user_activity_dateTime] as String),
-        user_activity_duration:
-            json[user_activityFields.user_activity_duration] as int,
-        user_activity_rep: json[user_activityFields.user_activity_rep] as int,
-        user_activity_set: json[user_activityFields.user_activity_set] as int,
-        user_activity_calories_burnt:
-            json[user_activityFields.user_activity_calories_burnt] as int,
-      );
+    user_activity_id: json[user_activityFields.user_activity_id] as int?,
+    user_login_id: json[user_activityFields.user_login_id] as int?,
+    user_exercise_category_id:
+    json[user_activityFields.user_exercise_category_id] as int?,
+    user_exercise_id: json[user_activityFields.user_exercise_id] as int?,
+    user_activity_intensity:
+    json[user_activityFields.user_activity_intensity] as String,
+    user_activity_dateTime: DateTime.parse(
+        json[user_activityFields.user_activity_dateTime] as String),
+    user_activity_duration:
+    json[user_activityFields.user_activity_duration] as int,
+    user_activity_rep: json[user_activityFields.user_activity_rep] as int,
+    user_activity_set: json[user_activityFields.user_activity_set] as int,
+    user_activity_calories_burnt:
+    json[user_activityFields.user_activity_calories_burnt] as int,
+  );
 
   Map<String, Object?> toJson() => {
-        user_activityFields.user_activity_id: user_activity_id,
-        user_activityFields.user_login_id: user_login_id,
-        user_activityFields.user_exercise_category_id:
-            user_exercise_category_id,
-        user_activityFields.user_exercise_id: user_exercise_id,
-        user_activityFields.user_activity_intensity: user_activity_intensity,
-        user_activityFields.user_activity_dateTime:
-            user_activity_dateTime.toIso8601String(),
-        user_activityFields.user_activity_duration: user_activity_duration,
-        user_activityFields.user_activity_rep: user_activity_rep,
-        user_activityFields.user_activity_set: user_activity_set,
-        user_activityFields.user_activity_calories_burnt:
-            user_activity_calories_burnt,
-      };
+    user_activityFields.user_activity_id: user_activity_id,
+    user_activityFields.user_login_id: user_login_id,
+    user_activityFields.user_exercise_category_id:
+    user_exercise_category_id,
+    user_activityFields.user_exercise_id: user_exercise_id,
+    user_activityFields.user_activity_intensity: user_activity_intensity,
+    user_activityFields.user_activity_dateTime:
+    user_activity_dateTime.toIso8601String(),
+    user_activityFields.user_activity_duration: user_activity_duration,
+    user_activityFields.user_activity_rep: user_activity_rep,
+    user_activityFields.user_activity_set: user_activity_set,
+    user_activityFields.user_activity_calories_burnt:
+    user_activity_calories_burnt,
+  };
 }
 
 //////////////////////////////EXERCISE_CATEGORY TABLE INFO///////////////////////////////////////////////////
@@ -314,29 +314,29 @@ class exercise_category {
   }) =>
       exercise_category(
           exercise_category_id:
-              exercise_category_id ?? this.exercise_category_id,
+          exercise_category_id ?? this.exercise_category_id,
           exercise_category_name:
-              exercise_category_name ?? this.exercise_category_name,
+          exercise_category_name ?? this.exercise_category_name,
           exercise_category_description: exercise_category_description ??
               this.exercise_category_description);
 
   static exercise_category fromJson(Map<String, Object?> json) =>
       exercise_category(
         exercise_category_id:
-            json[exercise_categoryFields.exercise_category_id] as int?,
+        json[exercise_categoryFields.exercise_category_id] as int?,
         exercise_category_name:
-            json[exercise_categoryFields.exercise_category_name] as String,
+        json[exercise_categoryFields.exercise_category_name] as String,
         exercise_category_description:
-            json[exercise_categoryFields.exercise_category_description]
-                as String,
+        json[exercise_categoryFields.exercise_category_description]
+        as String,
       );
 
   Map<String, Object?> toJson() => {
-        exercise_categoryFields.exercise_category_id: exercise_category_id,
-        exercise_categoryFields.exercise_category_name: exercise_category_name,
-        exercise_categoryFields.exercise_category_description:
-            exercise_category_description,
-      };
+    exercise_categoryFields.exercise_category_id: exercise_category_id,
+    exercise_categoryFields.exercise_category_name: exercise_category_name,
+    exercise_categoryFields.exercise_category_description:
+    exercise_category_description,
+  };
 }
 
 //////////////////////////////USER_EXERCISE TABLE INFO///////////////////////////////////////////////////
@@ -393,46 +393,46 @@ class user_exercise {
       user_exercise(
         user_exercise_id: user_exercise_id ?? this.user_exercise_id,
         user_exercise_category_id:
-            user_exercise_category_id ?? this.user_exercise_category_id,
+        user_exercise_category_id ?? this.user_exercise_category_id,
         user_exercise_name: user_exercise_name ?? this.user_exercise_name,
         user_exercise_target_area:
-            user_exercise_target_area ?? this.user_exercise_target_area,
+        user_exercise_target_area ?? this.user_exercise_target_area,
         user_exercise_default_weight:
-            user_exercise_default_weight ?? this.user_exercise_default_weight,
+        user_exercise_default_weight ?? this.user_exercise_default_weight,
         user_exercise_instructions:
-            user_exercise_instructions ?? this.user_exercise_instructions,
+        user_exercise_instructions ?? this.user_exercise_instructions,
         user_exercise_video: user_exercise_video ?? this.user_exercise_video,
       );
 
   static user_exercise fromJson(Map<String, Object?> json) => user_exercise(
-        user_exercise_id: json[user_exerciseFields.user_exercise_id] as int?,
-        user_exercise_category_id:
-            json[user_exerciseFields.user_exercise_category_id] as int?,
-        user_exercise_name:
-            json[user_exerciseFields.user_exercise_name] as String,
-        user_exercise_target_area:
-            json[user_exerciseFields.user_exercise_target_area] as String,
-        user_exercise_default_weight:
-            json[user_exerciseFields.user_exercise_default_weight] as int,
-        user_exercise_instructions:
-            json[user_exerciseFields.user_exercise_instruction] as String,
-        user_exercise_video:
-            json[user_exerciseFields.user_exercise_video] as String,
-      );
+    user_exercise_id: json[user_exerciseFields.user_exercise_id] as int?,
+    user_exercise_category_id:
+    json[user_exerciseFields.user_exercise_category_id] as int?,
+    user_exercise_name:
+    json[user_exerciseFields.user_exercise_name] as String,
+    user_exercise_target_area:
+    json[user_exerciseFields.user_exercise_target_area] as String,
+    user_exercise_default_weight:
+    json[user_exerciseFields.user_exercise_default_weight] as int,
+    user_exercise_instructions:
+    json[user_exerciseFields.user_exercise_instruction] as String,
+    user_exercise_video:
+    json[user_exerciseFields.user_exercise_video] as String,
+  );
 
   Map<String, Object?> toJson() => {
-        user_exerciseFields.user_exercise_id: user_exercise_id,
-        user_exerciseFields.user_exercise_category_id:
-            user_exercise_category_id,
-        user_exerciseFields.user_exercise_name: user_exercise_name,
-        user_exerciseFields.user_exercise_target_area:
-            user_exercise_target_area,
-        user_exerciseFields.user_exercise_default_weight:
-            user_exercise_default_weight,
-        user_exerciseFields.user_exercise_instruction:
-            user_exercise_instructions,
-        user_exerciseFields.user_exercise_video: user_exercise_video,
-      };
+    user_exerciseFields.user_exercise_id: user_exercise_id,
+    user_exerciseFields.user_exercise_category_id:
+    user_exercise_category_id,
+    user_exerciseFields.user_exercise_name: user_exercise_name,
+    user_exerciseFields.user_exercise_target_area:
+    user_exercise_target_area,
+    user_exerciseFields.user_exercise_default_weight:
+    user_exercise_default_weight,
+    user_exerciseFields.user_exercise_instruction:
+    user_exercise_instructions,
+    user_exerciseFields.user_exercise_video: user_exercise_video,
+  };
 }
 
 //////////////////////////////WORKOUT_PLANNER TABLE INFO///////////////////////////////////////////////////
@@ -502,30 +502,30 @@ class workout_planner {
       );
 
   static workout_planner fromJson(Map<String, Object?> json) => workout_planner(
-        workout_planner_id:
-            json[workout_plannerFields.workout_planner_id] as int?,
-        user_login_id: json[workout_plannerFields.user_login_id] as int?,
-        user_exercise_id: json[workout_plannerFields.user_exercise_id] as int?,
-        exercise_category_id:
-            json[workout_plannerFields.exercise_category_id] as int,
-        workout_time_date: DateTime.parse(
-            json[workout_plannerFields.workout_time_date] as String),
-        workout_rep: json[workout_plannerFields.workout_rep] as int,
-        workout_set: json[workout_plannerFields.workout_set] as int,
-        workout_duration: json[workout_plannerFields.workout_duration] as int,
-      );
+    workout_planner_id:
+    json[workout_plannerFields.workout_planner_id] as int?,
+    user_login_id: json[workout_plannerFields.user_login_id] as int?,
+    user_exercise_id: json[workout_plannerFields.user_exercise_id] as int?,
+    exercise_category_id:
+    json[workout_plannerFields.exercise_category_id] as int,
+    workout_time_date: DateTime.parse(
+        json[workout_plannerFields.workout_time_date] as String),
+    workout_rep: json[workout_plannerFields.workout_rep] as int,
+    workout_set: json[workout_plannerFields.workout_set] as int,
+    workout_duration: json[workout_plannerFields.workout_duration] as int,
+  );
 
   Map<String, Object?> toJson() => {
-        workout_plannerFields.workout_planner_id: workout_planner_id,
-        workout_plannerFields.user_login_id: user_login_id,
-        workout_plannerFields.user_exercise_id: user_exercise_id,
-        workout_plannerFields.exercise_category_id: exercise_category_id,
-        workout_plannerFields.workout_time_date:
-            workout_time_date.toIso8601String(),
-        workout_plannerFields.workout_rep: workout_rep,
-        workout_plannerFields.workout_set: workout_set,
-        workout_plannerFields.workout_duration: workout_duration,
-      };
+    workout_plannerFields.workout_planner_id: workout_planner_id,
+    workout_plannerFields.user_login_id: user_login_id,
+    workout_plannerFields.user_exercise_id: user_exercise_id,
+    workout_plannerFields.exercise_category_id: exercise_category_id,
+    workout_plannerFields.workout_time_date:
+    workout_time_date.toIso8601String(),
+    workout_plannerFields.workout_rep: workout_rep,
+    workout_plannerFields.workout_set: workout_set,
+    workout_plannerFields.workout_duration: workout_duration,
+  };
 }
 
 //////////////////////////////MEAL_PLANNER TABLE INFO///////////////////////////////////////////////////
@@ -573,26 +573,26 @@ class meal_planner {
           user_login_id: user_login_id ?? this.user_login_id,
           food_id: food_id ?? this.food_id,
           meal_planner_date_time:
-              meal_planner_date_time ?? this.meal_planner_date_time,
+          meal_planner_date_time ?? this.meal_planner_date_time,
           meal_name: meal_name ?? this.meal_name);
 
   static meal_planner fromJson(Map<String, Object?> json) => meal_planner(
-        meal_planner_id: json[meal_plannerFields.meal_planner_id] as int?,
-        user_login_id: json[meal_plannerFields.user_login_id] as int?,
-        food_id: json[meal_plannerFields.food_id] as int?,
-        meal_planner_date_time: DateTime.parse(
-            json[meal_plannerFields.meal_planner_date_time] as String),
-        meal_name: json[meal_plannerFields.meal_name] as String,
-      );
+    meal_planner_id: json[meal_plannerFields.meal_planner_id] as int?,
+    user_login_id: json[meal_plannerFields.user_login_id] as int?,
+    food_id: json[meal_plannerFields.food_id] as int?,
+    meal_planner_date_time: DateTime.parse(
+        json[meal_plannerFields.meal_planner_date_time] as String),
+    meal_name: json[meal_plannerFields.meal_name] as String,
+  );
 
   Map<String, Object?> toJson() => {
-        meal_plannerFields.meal_planner_id: meal_planner_id,
-        meal_plannerFields.user_login_id: user_login_id,
-        meal_plannerFields.food_id: food_id,
-        meal_plannerFields.meal_planner_date_time:
-            meal_planner_date_time.toIso8601String(),
-        meal_plannerFields.meal_name: meal_name,
-      };
+    meal_plannerFields.meal_planner_id: meal_planner_id,
+    meal_plannerFields.user_login_id: user_login_id,
+    meal_plannerFields.food_id: food_id,
+    meal_plannerFields.meal_planner_date_time:
+    meal_planner_date_time.toIso8601String(),
+    meal_plannerFields.meal_name: meal_name,
+  };
 }
 
 //////////////////////////////FOOD_INFO TABLE INFO///////////////////////////////////////////////////
@@ -650,22 +650,22 @@ class food_info {
       );
 
   static food_info fromJson(Map<String, Object?> json) => food_info(
-        food_id: json[food_infoFields.food_id] as int?,
-        food_category: json[food_infoFields.food_category] as String,
-        food_description: json[food_infoFields.food_description] as String,
-        food_serving_size: json[food_infoFields.food_serving_size] as int,
-        food_calories: json[food_infoFields.food_calories] as int,
-        food_nutrition_id: json[food_infoFields.food_nutrition_id] as int?,
-      );
+    food_id: json[food_infoFields.food_id] as int?,
+    food_category: json[food_infoFields.food_category] as String,
+    food_description: json[food_infoFields.food_description] as String,
+    food_serving_size: json[food_infoFields.food_serving_size] as int,
+    food_calories: json[food_infoFields.food_calories] as int,
+    food_nutrition_id: json[food_infoFields.food_nutrition_id] as int?,
+  );
 
   Map<String, Object?> toJson() => {
-        food_infoFields.food_id: food_id,
-        food_infoFields.food_category: food_category,
-        food_infoFields.food_description: food_description,
-        food_infoFields.food_serving_size: food_serving_size,
-        food_infoFields.food_calories: food_calories,
-        food_infoFields.food_nutrition_id: food_nutrition_id,
-      };
+    food_infoFields.food_id: food_id,
+    food_infoFields.food_category: food_category,
+    food_infoFields.food_description: food_description,
+    food_infoFields.food_serving_size: food_serving_size,
+    food_infoFields.food_calories: food_calories,
+    food_infoFields.food_nutrition_id: food_nutrition_id,
+  };
 }
 
 //////////////////////////////FOOD_NUTRITION TABLE INFO///////////////////////////////////////////////////
@@ -765,36 +765,36 @@ class food_nutrition {
       );
 
   static food_nutrition fromJson(Map<String, Object?> json) => food_nutrition(
-        food_nutrition_id: json[food_nutritionFields.food_nutrition_id] as int?,
-        total_carbs: json[food_nutritionFields.total_carbs] as int,
-        calcium: json[food_nutritionFields.calcium] as int,
-        cholesterol: json[food_nutritionFields.cholesterol] as int,
-        protein: json[food_nutritionFields.protein] as int,
-        fiber: json[food_nutritionFields.fiber] as int,
-        total_fat: json[food_nutritionFields.total_fat] as int,
-        iron: json[food_nutritionFields.iron] as int,
-        potassium: json[food_nutritionFields.potassium] as int,
-        sugar: json[food_nutritionFields.sugar] as int,
-        sodium: json[food_nutritionFields.sodium] as int,
-        vitamin_A: json[food_nutritionFields.vitamin_A] as int,
-        vitamin_C: json[food_nutritionFields.vitamin_C] as int,
-      );
+    food_nutrition_id: json[food_nutritionFields.food_nutrition_id] as int?,
+    total_carbs: json[food_nutritionFields.total_carbs] as int,
+    calcium: json[food_nutritionFields.calcium] as int,
+    cholesterol: json[food_nutritionFields.cholesterol] as int,
+    protein: json[food_nutritionFields.protein] as int,
+    fiber: json[food_nutritionFields.fiber] as int,
+    total_fat: json[food_nutritionFields.total_fat] as int,
+    iron: json[food_nutritionFields.iron] as int,
+    potassium: json[food_nutritionFields.potassium] as int,
+    sugar: json[food_nutritionFields.sugar] as int,
+    sodium: json[food_nutritionFields.sodium] as int,
+    vitamin_A: json[food_nutritionFields.vitamin_A] as int,
+    vitamin_C: json[food_nutritionFields.vitamin_C] as int,
+  );
 
   Map<String, Object?> toJson() => {
-        food_nutritionFields.food_nutrition_id: food_nutrition_id,
-        food_nutritionFields.total_carbs: total_carbs,
-        food_nutritionFields.calcium: calcium,
-        food_nutritionFields.cholesterol: cholesterol,
-        food_nutritionFields.protein: protein,
-        food_nutritionFields.fiber: fiber,
-        food_nutritionFields.total_fat: total_fat,
-        food_nutritionFields.iron: iron,
-        food_nutritionFields.potassium: potassium,
-        food_nutritionFields.sugar: sugar,
-        food_nutritionFields.sodium: sodium,
-        food_nutritionFields.vitamin_A: vitamin_A,
-        food_nutritionFields.vitamin_C: vitamin_C,
-      };
+    food_nutritionFields.food_nutrition_id: food_nutrition_id,
+    food_nutritionFields.total_carbs: total_carbs,
+    food_nutritionFields.calcium: calcium,
+    food_nutritionFields.cholesterol: cholesterol,
+    food_nutritionFields.protein: protein,
+    food_nutritionFields.fiber: fiber,
+    food_nutritionFields.total_fat: total_fat,
+    food_nutritionFields.iron: iron,
+    food_nutritionFields.potassium: potassium,
+    food_nutritionFields.sugar: sugar,
+    food_nutritionFields.sodium: sodium,
+    food_nutritionFields.vitamin_A: vitamin_A,
+    food_nutritionFields.vitamin_C: vitamin_C,
+  };
 }
 
 //////////////////////////////USER_MOVEMENT_TRACKER TABLE INFO///////////////////////////////////////////////////
@@ -812,7 +812,7 @@ class user_movement_trackerFields {
 
   static final String user_movement_tracker_id = '_user_movement_tracker_id';
   static final String user_login_id = 'user_login_id';
-  static final String user_step_count = 'user_distance';
+  static final String user_step_count = 'user_step_count';
   static final String user_distance = 'user_distance';
   static final String user_avg_speed = 'user_avg_speed';
   static final String user_movement_duration = 'user_movement_duration';
@@ -830,12 +830,12 @@ class user_movement_tracker {
 
   const user_movement_tracker(
       {this.user_movement_tracker_id,
-      required this.user_login_id,
-      required this.user_step_count,
-      required this.user_distance,
-      required this.user_avg_speed,
-      required this.user_movement_duration,
-      required this.user_movement_date_time});
+        required this.user_login_id,
+        required this.user_step_count,
+        required this.user_distance,
+        required this.user_avg_speed,
+        required this.user_movement_duration,
+        required this.user_movement_date_time});
 
   user_movement_tracker copy({
     int? user_movement_tracker_id,
@@ -848,44 +848,44 @@ class user_movement_tracker {
   }) =>
       user_movement_tracker(
         user_movement_tracker_id:
-            user_movement_tracker_id ?? this.user_movement_tracker_id,
+        user_movement_tracker_id ?? this.user_movement_tracker_id,
         user_login_id: user_login_id ?? this.user_login_id,
         user_step_count: user_step_count ?? this.user_step_count,
         user_distance: user_distance ?? this.user_distance,
         user_avg_speed: user_avg_speed ?? this.user_avg_speed,
         user_movement_duration:
-            user_movement_duration ?? this.user_movement_duration,
+        user_movement_duration ?? this.user_movement_duration,
         user_movement_date_time:
-            user_movement_date_time ?? this.user_movement_date_time,
+        user_movement_date_time ?? this.user_movement_date_time,
       );
 
   static user_movement_tracker fromJson(Map<String, Object?> json) =>
       user_movement_tracker(
         user_movement_tracker_id:
-            json[user_movement_trackerFields.user_movement_tracker_id] as int?,
+        json[user_movement_trackerFields.user_movement_tracker_id] as int?,
         user_login_id: json[user_movement_trackerFields.user_login_id] as int?,
         user_step_count:
-            json[user_movement_trackerFields.user_step_count] as int,
+        json[user_movement_trackerFields.user_step_count] as int,
         user_distance: json[user_movement_trackerFields.user_distance] as int,
         user_avg_speed: json[user_movement_trackerFields.user_avg_speed] as int,
         user_movement_duration:
-            json[user_movement_trackerFields.user_movement_duration] as int,
+        json[user_movement_trackerFields.user_movement_duration] as int,
         user_movement_date_time: DateTime.parse(
             [user_movement_trackerFields.user_movement_date_time] as String),
       );
 
   Map<String, Object?> toJson() => {
-        user_movement_trackerFields.user_movement_tracker_id:
-            user_movement_tracker_id,
-        user_movement_trackerFields.user_login_id: user_login_id,
-        user_movement_trackerFields.user_step_count: user_step_count,
-        user_movement_trackerFields.user_distance: user_distance,
-        user_movement_trackerFields.user_avg_speed: user_avg_speed,
-        user_movement_trackerFields.user_movement_duration:
-            user_movement_duration,
-        user_movement_trackerFields.user_movement_date_time:
-            user_movement_date_time.toIso8601String(),
-      };
+    user_movement_trackerFields.user_movement_tracker_id:
+    user_movement_tracker_id,
+    user_movement_trackerFields.user_login_id: user_login_id,
+    user_movement_trackerFields.user_step_count: user_step_count,
+    user_movement_trackerFields.user_distance: user_distance,
+    user_movement_trackerFields.user_avg_speed: user_avg_speed,
+    user_movement_trackerFields.user_movement_duration:
+    user_movement_duration,
+    user_movement_trackerFields.user_movement_date_time:
+    user_movement_date_time.toIso8601String(),
+  };
 }
 
 //////////////////////////////SETTINGS TABLE INFO///////////////////////////////////////////////////
@@ -918,11 +918,11 @@ class setting {
 
   const setting(
       {this.setting_id,
-      required this.login_id,
-      required this.setting_distance_unit,
-      required this.setting_weight_unit,
-      required this.setting_speed_unit,
-      required this.setting_language});
+        required this.login_id,
+        required this.setting_distance_unit,
+        required this.setting_weight_unit,
+        required this.setting_speed_unit,
+        required this.setting_language});
 
   setting copy({
     int? setting_id,
@@ -936,30 +936,30 @@ class setting {
         setting_id: setting_id ?? this.setting_id,
         login_id: login_id ?? this.login_id,
         setting_distance_unit:
-            setting_distance_unit ?? this.setting_distance_unit,
+        setting_distance_unit ?? this.setting_distance_unit,
         setting_weight_unit: setting_weight_unit ?? this.setting_weight_unit,
         setting_speed_unit: setting_speed_unit ?? this.setting_speed_unit,
         setting_language: setting_language ?? this.setting_language,
       );
 
   static setting fromJson(Map<String, Object?> json) => setting(
-        setting_id: json[settingFields.setting_id] as int?,
-        login_id: json[settingFields.login_id] as int?,
-        setting_distance_unit:
-            json[settingFields.setting_distance_unit] as String,
-        setting_weight_unit: json[settingFields.setting_weight_unit] as String,
-        setting_speed_unit: json[settingFields.setting_speed_unit] as String,
-        setting_language: json[settingFields.setting_language] as String,
-      );
+    setting_id: json[settingFields.setting_id] as int?,
+    login_id: json[settingFields.login_id] as int?,
+    setting_distance_unit:
+    json[settingFields.setting_distance_unit] as String,
+    setting_weight_unit: json[settingFields.setting_weight_unit] as String,
+    setting_speed_unit: json[settingFields.setting_speed_unit] as String,
+    setting_language: json[settingFields.setting_language] as String,
+  );
 
   Map<String, Object?> toJson() => {
-        settingFields.setting_id: setting_id,
-        settingFields.login_id: login_id,
-        settingFields.setting_distance_unit: setting_distance_unit,
-        settingFields.setting_weight_unit: setting_weight_unit,
-        settingFields.setting_speed_unit: setting_speed_unit,
-        settingFields.setting_language: setting_language,
-      };
+    settingFields.setting_id: setting_id,
+    settingFields.login_id: login_id,
+    settingFields.setting_distance_unit: setting_distance_unit,
+    settingFields.setting_weight_unit: setting_weight_unit,
+    settingFields.setting_speed_unit: setting_speed_unit,
+    settingFields.setting_language: setting_language,
+  };
 }
 
 //////////////////////////////FRIENDS_LIST TABLE INFO///////////////////////////////////////////////////
@@ -983,8 +983,8 @@ class friends_list {
 
   const friends_list(
       {this.friend_list_id,
-      required this.user_login_id,
-      required this.friend_email});
+        required this.user_login_id,
+        required this.friend_email});
 
   friends_list copy({
     int? friend_list_id,
@@ -997,16 +997,16 @@ class friends_list {
           friend_email: friend_email ?? this.friend_email);
 
   static friends_list fromJson(Map<String, Object?> json) => friends_list(
-        friend_list_id: json[friends_listFields.friend_list_id] as int?,
-        user_login_id: json[friends_listFields.user_login_id] as int?,
-        friend_email: json[friends_listFields.friend_email] as String?,
-      );
+    friend_list_id: json[friends_listFields.friend_list_id] as int?,
+    user_login_id: json[friends_listFields.user_login_id] as int?,
+    friend_email: json[friends_listFields.friend_email] as String?,
+  );
 
   Map<String, Object?> toJson() => {
-        friends_listFields.friend_list_id: friend_list_id,
-        friends_listFields.user_login_id: user_login_id,
-        friends_listFields.friend_email: friend_email,
-      };
+    friends_listFields.friend_list_id: friend_list_id,
+    friends_listFields.user_login_id: user_login_id,
+    friends_listFields.friend_email: friend_email,
+  };
 }
 
 //////////////////////////////FRIENDS_FRIENDSHIP TABLE INFO///////////////////////////////////////////////////
@@ -1026,8 +1026,8 @@ class friend_friendship {
 
   const friend_friendship(
       {this.friend_list_id,
-      required this.friendship_id,
-      required this.friend_friendship_id});
+        required this.friendship_id,
+        required this.friend_friendship_id});
 
   friend_friendship copy({
     int? friend_list_id,
@@ -1036,23 +1036,23 @@ class friend_friendship {
   }) =>
       friend_friendship(
           friend_friendship_id:
-              friend_friendship_id ?? this.friend_friendship_id,
+          friend_friendship_id ?? this.friend_friendship_id,
           friend_list_id: friend_list_id ?? this.friend_list_id,
           friendship_id: friendship_id ?? this.friendship_id);
 
   static friend_friendship fromJson(Map<String, Object?> json) =>
       friend_friendship(
         friend_friendship_id:
-            json[friend_friendshipFields.friend_friendship_id] as int?,
+        json[friend_friendshipFields.friend_friendship_id] as int?,
         friend_list_id: json[friend_friendshipFields.friend_list_id] as int?,
         friendship_id: json[friend_friendshipFields.friendship_id] as int?,
       );
 
   Map<String, Object?> toJson() => {
-        friend_friendshipFields.friend_friendship_id: friend_friendship_id,
-        friend_friendshipFields.friend_list_id: friend_list_id,
-        friend_friendshipFields.friendship_id: friendship_id,
-      };
+    friend_friendshipFields.friend_friendship_id: friend_friendship_id,
+    friend_friendshipFields.friend_list_id: friend_list_id,
+    friend_friendshipFields.friendship_id: friendship_id,
+  };
 }
 
 //////////////////////////////FRIENDSHIP TABLE INFO///////////////////////////////////////////////////
@@ -1078,14 +1078,14 @@ class friendship {
       friendship_type: friendship_type ?? this.friendship_type);
 
   static friendship fromJson(Map<String, Object?> json) => friendship(
-        friendship_id: json[friendshipFields.friendship_id] as int?,
-        friendship_type: json[friendshipFields.friendship_type] as String,
-      );
+    friendship_id: json[friendshipFields.friendship_id] as int?,
+    friendship_type: json[friendshipFields.friendship_type] as String,
+  );
 
   Map<String, Object?> toJson() => {
-        friendshipFields.friendship_id: friendship_id,
-        friendshipFields.friendship_type: friendship_type,
-      };
+    friendshipFields.friendship_id: friendship_id,
+    friendshipFields.friendship_type: friendship_type,
+  };
 }
 
 //////////////////////////////USER_HEALTH TABLE INFO///////////////////////////////////////////////////
@@ -1098,6 +1098,7 @@ class user_healthFields {
     user_bmi,
     user_calories_burnt,
     user_calories_consumed,
+    date_time_recorded,
     user_hydration_litres
   ];
 
@@ -1149,35 +1150,35 @@ class user_health {
         user_bmi: user_bmi ?? this.user_bmi,
         user_calories_burnt: user_calories_burnt ?? this.user_calories_burnt,
         user_calories_consumed:
-            user_calories_consumed ?? this.user_calories_burnt,
+        user_calories_consumed ?? this.user_calories_burnt,
         date_time_recorded: date_time_recorded ?? this.date_time_recorded,
         user_hydration_litres:
-            user_hydration_litres ?? this.user_hydration_litres,
+        user_hydration_litres ?? this.user_hydration_litres,
       );
 
   static user_health fromJson(Map<String, Object?> json) => user_health(
-        health_id: json[user_healthFields.health_id] as int?,
-        user_id: json[user_healthFields.user_id] as int?,
-        user_weight: json[user_healthFields.user_weight] as int,
-        user_bmi: json[user_healthFields.user_bmi] as int,
-        user_calories_burnt: json[user_healthFields.user_calories_burnt] as int,
-        user_calories_consumed:
-            json[user_healthFields.user_calories_consumed] as int,
-        date_time_recorded: DateTime.parse(
-            json[user_healthFields.date_time_recorded] as String),
-        user_hydration_litres:
-            json[user_healthFields.user_hydration_litres] as double,
-      );
+    health_id: json[user_healthFields.health_id] as int?,
+    user_id: json[user_healthFields.user_id] as int?,
+    user_weight: json[user_healthFields.user_weight] as int,
+    user_bmi: json[user_healthFields.user_bmi] as int,
+    user_calories_burnt: json[user_healthFields.user_calories_burnt] as int,
+    user_calories_consumed:
+    json[user_healthFields.user_calories_consumed] as int,
+    date_time_recorded: DateTime.parse(
+        json[user_healthFields.date_time_recorded] as String),
+    user_hydration_litres:
+    json[user_healthFields.user_hydration_litres] as double,
+  );
 
   Map<String, Object?> toJson() => {
-        user_healthFields.health_id: health_id,
-        user_healthFields.user_id: user_id,
-        user_healthFields.user_weight: user_weight,
-        user_healthFields.user_bmi: user_bmi,
-        user_healthFields.user_calories_burnt: user_calories_burnt,
-        user_healthFields.user_calories_consumed: user_calories_consumed,
-        user_healthFields.date_time_recorded:
-            date_time_recorded.toIso8601String(),
-        user_healthFields.user_hydration_litres: user_hydration_litres,
-      };
+    user_healthFields.health_id: health_id,
+    user_healthFields.user_id: user_id,
+    user_healthFields.user_weight: user_weight,
+    user_healthFields.user_bmi: user_bmi,
+    user_healthFields.user_calories_burnt: user_calories_burnt,
+    user_healthFields.user_calories_consumed: user_calories_consumed,
+    user_healthFields.date_time_recorded:
+    date_time_recorded.toIso8601String(),
+    user_healthFields.user_hydration_litres: user_hydration_litres,
+  };
 }
