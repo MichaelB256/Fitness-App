@@ -13,23 +13,23 @@ class _HydrationPageState extends State<HydrationPage> {
 
   List<MapEntry<String, Widget>> _graphs = [];
   List<DropdownMenuItem<String>> dropDownItems = [
-    DropdownMenuItem(
+    const DropdownMenuItem(
       child: Text('Weight'),
       value: 'Weight',
     ),
-    DropdownMenuItem(
+    const DropdownMenuItem(
       child: Text('BMI'),
       value: 'BMI',
     ),
-    DropdownMenuItem(
+    const DropdownMenuItem(
       child: Text('Calorie Intake'),
       value: 'Calorie Intake',
     ),
-    DropdownMenuItem(
+    const DropdownMenuItem(
       child: Text('Calories Burnt'),
       value: 'Calories Burnt',
     ),
-    DropdownMenuItem(
+    const DropdownMenuItem(
       child: Text('Water Intake'),
       value: 'Water Intake',
     ),
@@ -61,20 +61,20 @@ class _HydrationPageState extends State<HydrationPage> {
     );
   }
 
-  Widget healthDataEntryButton(){
+  Widget healthDataEntryButton() {
     return TextButton(
       style: TextButton.styleFrom(
         textStyle: const TextStyle(fontSize: 10),
       ),
       onPressed: () => showDialog<String>(
         context: context,
-        builder: (BuildContext context) => AlertDialog(title:
-        Text('Health Entry'),
+        builder: (BuildContext context) => AlertDialog(
+            title: const Text('Health Entry'),
             content: SingleChildScrollView(
               scrollDirection: Axis.vertical,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children:[
+                children: const [
                   SizedBox(
                     height: 50.0, // set the height as per your requirement
                     child: TextField(
@@ -129,24 +129,28 @@ class _HydrationPageState extends State<HydrationPage> {
                       ),
                     ),
                   ),
-
                 ],
               ),
             ),
-            actions:[TextButton(
-              child: Text('CANCEL'),
-              onPressed: () {Navigator.pop(context);},
-            ),
+            actions: [
               TextButton(
-                child: Text('SUBMIT'),
+                child: const Text('CANCEL'),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              TextButton(
+                child: const Text('SUBMIT'),
                 onPressed: () {},
-              ),]
-        ),
+              ),
+            ]),
       ),
-      child: const Text('Add Health Data'),
+      child: const Text(
+        'Add Health Data',
+        style: TextStyle(fontSize: 20),
+      ),
     );
   }
-
 
   Widget graph(String? title, int index) {
     return Column(children: [
@@ -156,7 +160,7 @@ class _HydrationPageState extends State<HydrationPage> {
             flex: 20,
             child: Text(
               title.toString(),
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -196,10 +200,9 @@ class _HydrationPageState extends State<HydrationPage> {
             series: <ChartSeries>[
               LineSeries<hydrationData, double>(
                 dataSource: _chartData,
-                xValueMapper: (hydrationData consumption, _) =>
-                consumption.day,
+                xValueMapper: (hydrationData consumption, _) => consumption.day,
                 yValueMapper: (hydrationData consumption, _) =>
-                consumption.consumption,
+                    consumption.consumption,
               ),
             ],
           ),
@@ -218,35 +221,21 @@ class _HydrationPageState extends State<HydrationPage> {
     var height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      body: Align(
-        alignment: FractionalOffset.topCenter,
-        child: Column(children: [
-          Stack(
-            children: [
-              Align(
-                alignment: Alignment.centerLeft,
-                child:IconButton(
-                  iconSize: 20,
-                  splashRadius: 10,
-                  icon: const Icon(Icons.arrow_back),
-                  onPressed: () {
-                    setState(() {});
-                  },
-                ),
+      body: Column(
+        children: [
+          AppBar(
+            title: const Text(
+              'Fitness Data',
+              style: TextStyle(
+                color: Colors.black,
               ),
-              const Align(
-                alignment: Alignment.center,
-                child: Text('Qualitative Fitness Data',style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.blueAccent,
-                  fontWeight: FontWeight.bold,
-                ),),
-              ),
-            ],
+            ),
+            backgroundColor: Colors.white,
+            iconTheme: const IconThemeData(color: Colors.blueAccent),
           ),
           Expanded(
             flex: 20,
-            child: Container(
+            child: SizedBox(
               height: height,
               width: width * 0.9,
               child: ListView.builder(
@@ -255,7 +244,7 @@ class _HydrationPageState extends State<HydrationPage> {
               ),
             ),
           ),
-        ]),
+        ],
       ),
     );
   }
